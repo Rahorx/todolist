@@ -22,6 +22,7 @@ import jakarta.servlet.http.HttpServletRequest;
 @RequestMapping("/tasks")
 public class TaskController {
     
+    
     @Autowired
     private ITaskRepository taskRepository;
 
@@ -55,14 +56,12 @@ public class TaskController {
 
     @PutMapping("/{id}")
     public TaskModel update(@RequestBody TaskModel taskModel, @PathVariable UUID id, HttpServletRequest request) {
-        var idUser = request.getAttribute("idUser");
-
-
-        var task = this.taskRepository.findById(id);
+        
+        var task = this.taskRepository.findById(id).orElse(null);
 
         Utils.copyNonNullProperties(taskModel, task);
+        
 
-
-        return this.taskRepository.save(taskModel);
+        return this.taskRepository.save(task);
     }
 }
