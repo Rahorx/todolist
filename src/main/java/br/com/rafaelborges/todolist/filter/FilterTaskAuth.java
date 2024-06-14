@@ -26,7 +26,6 @@ public class FilterTaskAuth extends OncePerRequestFilter{
             throws ServletException, IOException {
 
                 var servletPath = request.getServletPath();
-                System.out.println("PATH" + servletPath);
 
                 if(servletPath.startsWith("/tasks/")) {
 
